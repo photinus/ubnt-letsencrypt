@@ -13,7 +13,9 @@ Please note you are opening your edgerouter to the outside world. Please use com
 
 Start by connecting to your edgerouter via SSH and issue the command 
 > sudo -i
+
 Most of what we'll be doing requires Root access. Now we'll need to install wget
 > apt-get install wget
+
 Let's setup a base directory to work with
 > mkdir /opt/letsencrypt
