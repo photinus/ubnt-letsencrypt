@@ -32,5 +32,51 @@ Next, replace "yoursite.com" with your edge routers FQDN
 Now that we've got the basics ready, this is where we will tweak the ubiquiti stock setup to allow us to use Let's Encrypt.
 > mkdir -p /var/www/htdocs/.well-known/acme-challenge/
 
-We need to edit the Ubiquiti lighttpd configuration. You can either edit your existing configuration to include
->
+We need to edit the Ubiquiti lighttpd configuration. You can either edit your existing configuration to change:
+> url.rewrite-once = (
+>         "^(/(lib|media|ws|tests)/.*)" => "$0",
+>         "^/([^\?]+)(\?(.*))?$" => "/index.php/$1?$3"
+> )
+> 
+> $HTTP["scheme"] == "http" {
+>     $HTTP["url"] !~ "^/index.php/error/" {
+>         $HTTP["host"] =~ "^(.*)$" {
+>                 url.redirect = (
+>                         "^(.*)$" => "https://%1$1"
+>                 )
+>         }
+>     }
+>   }
+> }
+
+into
+
+> url.rewrite-once = (
+>         "^(/(lib|media|ws|tests|.well-known)/.*)" => "$0",
+>         "^/([^\?]+)(\?(.*))?$" => "/index.php/$1?$3"
+> )
+> 
+> $HTTP["scheme"] == "http" {
+>   $HTTP["url"] !~ "^/.well-known/acme-challenge/*" {
+>     $HTTP["url"] !~ "^/index.php/error/" {
+>         $HTTP["host"] =~ "^(.*)$" {
+>                 url.redirect = (
+>                         "^(.*)$" => "https://%1$1"
+>                 )
+>         }
+>     }
+>   }
+> }
+
+Now we've got the foundation for our Let's Encrypt setup. Next we restart lighttpd to pick up the new configuration file and then we'll get our first certificate.
+
+Restarting Lighttpd
+> ps -e | grep lighttpd | awk '{print $1;}' | xargs kill
+> /usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf
+
+Generating our first certificate
+> python /opt/letsencrypt/acme_tiny.py --account-key /opt/letsencrypt/account.key --csr /opt/letsencrypt/domain.csr --acme-dir /var/www/htdocs/.well-known/acme-challenge/ > /opt/letsencrypt/signed.crt
+
+Now, if that worked without any issue, we can setup our cron script and run it for the first time to put our new certificate in place. Just place a copy of letsrenew.sh into your /etc/cron.monthly directory and chmod 755 it.
+
+If everything went well you should have a shiny green lock icon next time you visit your Edgerouter's GUI.
