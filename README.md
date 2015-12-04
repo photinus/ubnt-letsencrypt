@@ -27,4 +27,10 @@ Now we're going to do some initial setup for Let's Encrypt
 openssl genrsa 4096 > domain.key
 
 Next, replace "yoursite.com" with your edge routers FQDN
-> openssl req -new -sha256 -key domain.key -subj "/CN=*yoursite.com*" > domain.csr
+> openssl req -new -sha256 -key domain.key -subj "/CN=**yoursite.com**" > domain.csr
+
+Now that we've got the basics ready, this is where we will tweak the ubiquiti stock setup to allow us to use Let's Encrypt.
+> mkdir -p /var/www/htdocs/.well-known/acme-challenge/
+
+We need to edit the Ubiquiti lighttpd configuration. You can either edit your existing configuration to include
+>
