@@ -19,3 +19,12 @@ Most of what we'll be doing requires Root access. Now we'll need to install wget
 
 Let's setup a base directory to work with
 > mkdir /opt/letsencrypt
+cd /opt/letsencrypt
+wget https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py
+
+Now we're going to do some initial setup for Let's Encrypt
+> openssl genrsa 4096 > account.key
+openssl genrsa 4096 > domain.key
+
+Next, replace "yoursite.com" with your edge routers FQDN
+> openssl req -new -sha256 -key domain.key -subj "/CN=*yoursite.com*" > domain.csr
