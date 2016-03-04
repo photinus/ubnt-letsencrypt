@@ -1,11 +1,11 @@
 # How to setup Let's Encrypt with the Ubiquiti Edge Router Lite
 
 Disclaimer:
-> You will be modifying some of the inner workings of your edgerouter. This could break your router. I believe the steps I ouline here are generally safe, but you will be issuing commands as root and can do damage easily. Be careful.
+> You will be modifying some of the inner workings of your edgerouter. This could break your router. I believe the steps I outline here are generally safe, but you will be issuing commands as root and can do damage easily. Be careful.
 
-For starters, You'll need:
-* acme_tiny.py, you can find it here: https://github.com/diafygi/acme-tiny
+For starters, you'll need:
 * SSH Access to your Edgerouter
+* acme_tiny.py, you can find it here: https://github.com/diafygi/acme-tiny
 * A FQDN for your edge router that is accessable externally
 * Port 80 open to your edge router externally
 
