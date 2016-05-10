@@ -1,5 +1,8 @@
 # Persistant Let's Encrypt with the Ubiquiti Edge Router Lite
 
+Originally by photinus
+Modified by [rholmboe](https://github.com/rholmboe/)
+
 Disclaimer:
 > You will be modifying some of the inner workings of your edgerouter. This could break your router. I believe the steps I outline here are generally safe, but you will be issuing commands as root and can do damage easily. Be careful.
 
