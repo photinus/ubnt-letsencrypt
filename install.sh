@@ -14,9 +14,9 @@ curl -o /config/scripts/post-config.d/install_letsencrypt.sh https://raw.githubu
 chmod 755 /config/scripts/post-config.d/install_letsencrypt.sh
 
 # Generate certifications which will be used
-openssl genrsa 4096 > /config/letsencrypt/account.key
-openssl genrsa 4096 > /config/letsencrypt/domain.key
-openssl req -new -sha256 -key domain.key -subj "/CN=$fqdn" > domain.csr
+openssl genrsa 4096 | tee /config/letsencrypt/account.key
+openssl genrsa 4096 | tee /config/letsencrypt/domain.key
+openssl req -new -sha256 -key domain.key -subj "/CN=$fqdn" | tee /config/letsencrypt/domain.csr
 
 # Making lighttpd configurations and restarting daemon
 mkdir /config/lighttpd/
