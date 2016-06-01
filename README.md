@@ -1,4 +1,4 @@
-# Persistant Let's Encrypt with the Ubiquiti Edge Router Lite
+# Persistent Let's Encrypt with the Ubiquiti Edge Router Lite
 
 Originally by photinus
 Modified by [rholmboe](https://github.com/rholmboe/)
