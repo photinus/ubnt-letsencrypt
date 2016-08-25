@@ -16,7 +16,7 @@ chmod 755 /config/scripts/post-config.d/install_letsencrypt.sh
 # Generate certifications which will be used
 openssl genrsa 4096 | tee /config/letsencrypt/account.key
 openssl genrsa 4096 | tee /config/letsencrypt/domain.key
-openssl req -new -sha256 -key domain.key -subj "/CN=$fqdn" | tee /config/letsencrypt/domain.csr
+openssl req -new -sha256 -key /config/letsencrypt/domain.key -subj "/CN=$fqdn" | tee /config/letsencrypt/domain.csr
 
 # Making lighttpd configurations and restarting daemon
 mkdir /config/lighttpd/
