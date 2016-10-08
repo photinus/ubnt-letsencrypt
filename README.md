@@ -8,18 +8,38 @@ Disclaimer:
 
 For starters, You'll need:
 * SSH Access to your Edgerouter
-* acme_tiny.py, you can find it here: https://github.com/diafygi/acme-tiny
+* https://github.com/diafygi/acme-tiny ( pulled in by this script )
 * A FQDN for your edge router that is accessable externally
+* Firewall rules that allow access to your web ui
 
 Please note you are opening your edgerouter to the outside world. Please use common sense and use a strong password and common security best practices.
 
 ## Installation
 
+Ensure you have firewall rules in place to allow remote access and a strong password:- e.g.
+
+```
+set firewall name WAN_LOCAL rule 15 action accept
+set firewall name WAN_LOCAL rule 15 description "Allow Remote WEBUI"
+set firewall name WAN_LOCAL rule 15 log disable
+set firewall name WAN_LOCAL rule 15 destination port 443
+set firewall name WAN_LOCAL rule 15 protocol tcp
+```
+
 SSH into your EdgeRouter and issue following command
 
 ```
-curl https://raw.githubusercontent.com/photinus/ubnt-letsencrypt/master/install.sh | sudo bash
+curl https://raw.githubusercontent.com/photinus/ubnt-letsencrypt/master/install.sh | sudo bash /dev/stdin public.dynamic.dns.of.your.router
 ```
-*Important* is to enter your external FQDN
+*Important* change public.dynamic.dns.of.your.router to whatever yours is!
 
 If everything went well you should have a shiny green lock icon next time you visit your Edgerouter's GUI.
+
+## Renewal
+
+Because letsencrpt certificates expire a renewal cronjob is setup by this script
+
+## Restoring
+
+If you have any problems then you can restore a self signed certificate with the restore.sh script
+
