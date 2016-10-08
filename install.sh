@@ -1,7 +1,11 @@
 #!/bin/bash
 
-# Input regarding FQDN which will be used
-read -p "Enter your full FQDN:" fqdn
+fatal(){
+  echo "$@"
+  exit 1
+}
+
+[ -z $1 ] && fatal "you must provide the public hostname of your edgerouter"
 
 # Creating persistant letsencrypt directories and downloading files
 mkdir /config/letsencrypt/
@@ -16,7 +20,7 @@ chmod 755 /config/scripts/post-config.d/install_letsencrypt.sh
 # Generate certifications which will be used
 openssl genrsa 4096 | tee /config/letsencrypt/account.key
 openssl genrsa 4096 | tee /config/letsencrypt/domain.key
-openssl req -new -sha256 -key domain.key -subj "/CN=$fqdn" | tee /config/letsencrypt/domain.csr
+openssl req -new -sha256 -key /config/letsencrypt/domain.key -subj "/CN=$fqdn" | tee /config/letsencrypt/domain.csr
 
 # Making lighttpd configurations and restarting daemon
 mkdir /config/lighttpd/
@@ -30,3 +34,5 @@ mkdir -p /var/www/htdocs/.well-known/acme-challenge/
 
 # Run letsrenew.sh file for initial connect and/or renewal, doesn't matter
 bash /config/letsencrypt/letsrenew.sh
+
+
