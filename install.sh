@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+
 fatal(){
   echo "$@"
   exit 1
