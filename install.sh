@@ -11,6 +11,7 @@ fqdn=$1
 
 # Creating persistant letsencrypt directories and downloading files
 [ -d /config/letsencrypt ] || mkdir /config/letsencrypt/
+cp /etc/lighttpd/server.pem /config/letsencrypt/oldcert.pem
 curl -o /config/letsencrypt/acme_tiny.py https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py
 chmod 755 /config/letsencrypt/acme_tiny.py
 curl -o /config/letsencrypt/letsrenew.sh https://raw.githubusercontent.com/rholmboe/ubnt-letsencrypt/master/letsrenew.sh
