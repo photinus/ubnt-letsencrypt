@@ -4,7 +4,7 @@
 cd /tmp
 
 echo " generate private key with no prompts"
-openssl req -newkey rsa:2048 -passout pass:'1234' -out self.csr -keyout temp.key -subj "/C=GB/ST=London/L=London/O=Home/OU=Hometech/CN=ubnt"
+openssl req -newkey rsa:2048 -passout pass:'1234' -out self.csr -keyout temp.key -subj "/C=US/ST=CA/L=San Jose/O=Ubiquiti Networks/CN=UBNT Router UI"
 
 echo " strip out passphrase from key"
 openssl rsa -in temp.key -passin pass:'1234' -out self.key
