@@ -29,7 +29,7 @@ echo "Making lighttpd configurations and restarting daemon so letsencypt and ver
 [ -d /config/lighttpd ] ||  mkdir /config/lighttpd/
 curl -o /config/lighttpd/lighttpd.conf https://raw.githubusercontent.com/kaethorn/ubnt-letsencrypt/master/lighttpd.conf
 ln -sf /config/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf
-ps -e | grep lighttpd | awk '{print $1;}' | xargs kill
+cat /var/run/lighttpd.pid | xargs kill
 /usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf
 
 # Create acme respons directory
