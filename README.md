@@ -1,7 +1,7 @@
 # Persistent Let's Encrypt with the Ubiquiti Edge Router Lite
 
 Originally by photinus
-Modified by [kaethorn](https://github.com/kaethorn/)
+Modified by [rholmboe](https://github.com/kaethorn/)
 
 Disclaimer:
 > You will be modifying some of the inner workings of your edgerouter. This could break your router. I believe the steps I outline here are generally safe, but you will be issuing commands as root and can do damage easily. Be careful.
@@ -29,7 +29,7 @@ set firewall name WAN_LOCAL rule 15 protocol tcp
 SSH into your EdgeRouter and issue following command
 
 ```
-curl https://raw.githubusercontent.com/kaethorn/ubnt-letsencrypt/master/install.sh | sudo bash /dev/stdin public.dynamic.dns.of.your.router
+curl https://raw.githubusercontent.com/rholmboe/ubnt-letsencrypt/master/install.sh | sudo bash /dev/stdin public.dynamic.dns.of.your.router
 ```
 *Important* change public.dynamic.dns.of.your.router to whatever yours is!
 
