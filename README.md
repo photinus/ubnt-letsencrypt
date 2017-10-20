@@ -16,7 +16,8 @@ Please note you are opening your edgerouter to the outside world. Please use com
 
 ## Installation
 
-Ensure you have firewall rules in place to allow remote access and a strong password:- e.g.
+Ensure you have firewall rules in place to allow remote access and a strong password:- e.g. 
+But you can also consider to install fail2ban to make it even more secure
 
 ```
 set firewall name WAN_LOCAL rule 15 action accept
@@ -31,7 +32,7 @@ SSH into your EdgeRouter and issue following command
 ```
 curl https://raw.githubusercontent.com/photinus/ubnt-letsencrypt/master/install.sh | sudo bash /dev/stdin public.dynamic.dns.of.your.router
 ```
-*Important* change public.dynamic.dns.of.your.router to whatever yours is!
+*Important* change public.dynamic.dns.of.your.router to whatever yours is! Dont use an ipadres! That will fail!
 
 If everything went well you should have a shiny green lock icon next time you visit your Edgerouter's GUI.
 
